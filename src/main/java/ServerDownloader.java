@@ -5,7 +5,6 @@ import com.serverjars.api.request.LatestRequest;
 import com.serverjars.api.response.LatestResponse;
 
 import java.io.File;
-import java.io.IOException;
 
 public class ServerDownloader {
 
@@ -14,7 +13,7 @@ public class ServerDownloader {
     private final String version = GUI.versioncomboBox.getSelectedItem().toString();
 
 
-    public ServerDownloader() throws IOException {
+    public ServerDownloader() {
 
 
         if (version.equals("Latest")) {
@@ -34,6 +33,7 @@ public class ServerDownloader {
             Response jarResponse = new JarRequest(type.toLowerCase(), version, new File(type + " " + version + ".jar")).send();
             if (jarResponse.isSuccess()) {
 
+                System.out.println(jarResponse.toString());
                 System.out.println("Download finished successfully!");
 
             } else {
