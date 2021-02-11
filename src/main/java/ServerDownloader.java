@@ -1,5 +1,9 @@
+import com.serverjars.api.JarDetails;
 import com.serverjars.api.Response;
 import com.serverjars.api.request.JarRequest;
+import com.serverjars.api.request.LatestRequest;
+import com.serverjars.api.response.LatestResponse;
+
 import java.io.File;
 import java.io.IOException;
 
@@ -13,14 +17,31 @@ public class ServerDownloader {
     public ServerDownloader() throws IOException {
 
 
-        Response jarResponse = new JarRequest(type.toLowerCase(), version, new File(type + " " + version + ".jar")).send();
-        if (jarResponse.isSuccess()) {
+        if (version.equals("Latest")) {
 
-            System.out.println("Download finished successfully!");
+            LatestResponse latestResponse = new LatestRequest(type.toLowerCase()).send();
+            if (latestResponse.isSuccess()) {
+
+                JarDetails jarDetails = latestResponse.getLatestJar();
+                System.out.println(jarDetails.toString());
+            } else {
+
+                System.out.println(latestResponse.getErrorTitle() + ": " + latestResponse.getErrorMessage());
+            }
 
         } else {
-            System.out.println(jarResponse.getErrorTitle() + ": " + jarResponse.getErrorMessage());
+
+            Response jarResponse = new JarRequest(type.toLowerCase(), version, new File(type + " " + version + ".jar")).send();
+            if (jarResponse.isSuccess()) {
+
+                System.out.println("Download finished successfully!");
+
+            } else {
+                System.out.println(jarResponse.getErrorTitle() + ": " + jarResponse.getErrorMessage());
+            }
+
         }
+
 
     }
 }
