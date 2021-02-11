@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/Server Generation.iml" filepath="$PROJECT_DIR$/Server Generation.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/Server Generation.iml" filepath="$PROJECT_DIR$/.idea/Server Generation.iml" />
     </modules>
   </component>
 </project>
